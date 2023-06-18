@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:task_list_app/common/app_style.dart';
 
 class AppNavigationBar extends StatelessWidget {
   const AppNavigationBar({Key? key}) : super(key: key);
-
-  @override
+   @override
   Widget build(BuildContext context) {
     return ColoredBox(
       color: AppStyle.darkBlue,
@@ -26,6 +26,7 @@ class AppNavigationBar extends StatelessWidget {
 }
 
 class _NavigationBarListItem extends StatelessWidget {
+
   const _NavigationBarListItem({
     Key? key,
     required this.item,
@@ -37,11 +38,16 @@ class _NavigationBarListItem extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Text(
-        item.name,
-        style: TextStyle(
-          color: AppStyle.lightTextColor,
-          fontSize: 18,
+      child: InkWell(
+        onTap: (){
+          context.go('/${item.url}');
+        },
+        child: Text(
+          item.name,
+          style: TextStyle(
+            color: AppStyle.lightTextColor,
+            fontSize: 18,
+          ),
         ),
       ),
     );

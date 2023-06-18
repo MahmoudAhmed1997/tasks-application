@@ -1,12 +1,14 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:task_list_app/model/task.dart';
 
-final networkServiceProvider = Provider<NetworkService>((ref) {
-  return NetworkService();
-});
+final myVariableProvider = Provider<String>((ref) => throw UnimplementedError());
 
-class NetworkService {
-  NetworkService();
+final taskListProvider = FutureProvider<List<Task>>((ref) async {
+  // Call your function to get the list of tasks
+  getTasks();
+  List<Task> tasks = await getTasks();
+  return tasks;
+});
 
   Future<List<Task>> getTasks() async {
     final now = DateTime.now();
@@ -19,5 +21,5 @@ class NetworkService {
       Task(id: '6', title: 'Order lunch', dateTime: now),
       Task(id: '7', title: 'Create an invoice for last month', dateTime: now),
     ];
-  }
+
 }
